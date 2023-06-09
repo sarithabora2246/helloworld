@@ -15,14 +15,14 @@ pipeline {
       steps {
         echo '<--------------- Building --------------->'
         sh 'printenv'
-        sh '/opt/apache-maven/bin/mvn clean install'
+        sh 'mvn clean install'
         echo '<------------- Build completed --------------->'
       }
     }
     stage('Unit Test') {
       steps {
         echo '<--------------- Unit Testing started  --------------->'
-        sh '/opt/apache-maven/bin/mvn surefire-report:report'
+        sh 'mvn surefire-report:report'
         echo '<------------- Unit Testing stopped  --------------->'
       }
     }
