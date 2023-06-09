@@ -37,7 +37,7 @@ pipeline {
 
         // }
         withSonarQubeEnv('sonarqube_token') {
-          sh 'mvn clean package sonar:sonar -Dsonar.projectKey=helloworld'
+          sh 'mvn clean package sonar:sonar'
           echo '<--------------- Sonar Analysis stopped  --------------->'
         }
       }
