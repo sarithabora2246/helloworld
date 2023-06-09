@@ -28,7 +28,7 @@ pipeline {
     }
     stage('Sonar Analysis') {
       environment {
-        scannerHome = tool 'SonarQubeScanner'
+        scannerHome = tool 'sonarqube'
       }
       steps {
         echo '<--------------- Sonar Analysis started  --------------->'
@@ -37,7 +37,7 @@ pipeline {
 
         // }
         withSonarQubeEnv('SonarQubeScanner') {
-          sh '/opt/apache-maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=helloworld'
+          sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=helloworld'
           echo '<--------------- Sonar Analysis stopped  --------------->'
         }
       }
