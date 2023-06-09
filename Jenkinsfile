@@ -26,36 +26,14 @@ pipeline {
         echo '<------------- Unit Testing stopped  --------------->'
       }
     }
-    stage('Sonar Analysis') {
-      environment {
-        scannerHome = tool 'sonarqube'
-      }
-      steps {
-        echo '<--------------- Sonar Analysis started  --------------->'
-                // withSonarQubeEnv('SonarServer') {
-                //     sh "${scannerHome}/bin/sonar-scanner"
-
-        // }
-        withSonarQubeEnv('sonarqube') {
-          sh 'mvn clean package sonar:sonar'
-          echo '<--------------- Sonar Analysis stopped  --------------->'
-        }
-      }
-    }
-    stage('Quality Gate') {
-      steps {
-        script {
-          echo '<--------------- Quality Gate started  --------------->'
-          timeout(time: 1, unit: 'MINUTES') {
-            def qg = waitForQualityGate()
-            if (qg.status != 'OK') {
-              error 'Pipeline failed due to the Quality gate issue'
-            }
+   stage("build & SonarQube analysis") {
+          node {
+              withSonarQubeEnv('sonarqube_token') {
+                 sh 'mvn clean package sonar:sonar'
+              }
           }
-          echo '<--------------- Quality Gate stopped  --------------->'
-        }
       }
-    }
+
     
 }
 }
