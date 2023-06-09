@@ -1,12 +1,9 @@
-def imageName = 'sonatypenexus/helloworld'
-def registry  = 'http://20.163.196.201:9091/repository/docker/'
-def version   = '1.0.2'
 pipeline {
   agent any
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/bkrraj/helloworld.git'
+        git branch: 'main', url: 'https://github.com/sarithabora2246/helloworld.git'
       }
     }
     stage('Pull Changes') {
