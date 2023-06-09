@@ -36,8 +36,8 @@ pipeline {
                 //     sh "${scannerHome}/bin/sonar-scanner"
 
         // }
-        withSonarQubeEnv('sonarqube_token') {
-          sh '/opt/apache-maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=helloworld'
+        withSonarQubeEnv('sonarqube') {
+          sh 'mvn clean package sonar:sonar'
           echo '<--------------- Sonar Analysis stopped  --------------->'
         }
       }
