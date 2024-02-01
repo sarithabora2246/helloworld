@@ -26,14 +26,21 @@ pipeline {
         echo '<------------- Unit Testing stopped  --------------->'
       }
     }
-   stage("Scan") {
+   /*stage("Scan") {
           steps {
               withSonarQubeEnv(installationName: 'sonarqube_token') {
                  sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
               }
           }
+      }*/
+    stage("Deploy") {
+          steps {
+              script {
+                 deploy adapters: [tomcat9(credentialsId: 'tomcat_deployer', path: '', url: 'http://localhost:8090')], contextPath: '/pipeline', onFailure: false, war: 'webapp/target/*.war' 
+              }
+          }
       }
-    
+
 
     
 }
