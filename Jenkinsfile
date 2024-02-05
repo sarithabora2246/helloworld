@@ -51,7 +51,7 @@ pipeline {
                     deploy adapters: [tomcat9(url: 'http://3.15.45.254:8080/',
                       credentialsId: 'tomcat_deployer')],
                       war: 'webapp/target/*.war',
-                      contextPath: '/app'
+                      contextPath: 'app'
               }
           }
       }
